@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <title>v_tileworkizer</title>
+  <desc>A two-dimensional workspace divided into one master tile and two stacked tiles.</desc>
+  <rect x="0" y="0" width="256" height="256" fill="#0d1726"/>
+  <rect x="28" y="28" width="112" height="200" fill="#30ccb3"/>
+  <rect x="152" y="28" width="76" height="94" fill="#316493"/>
+  <rect x="152" y="134" width="76" height="94" fill="#79bded"/>
+</svg>

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=v_tileworkizer background service
+Comment=Keep the workspace organizer active in this desktop session
+Exec=v_tileworkizer --supervise
+Icon=v_tileworkizer
+Terminal=false
+X-GNOME-Autostart-enabled=true

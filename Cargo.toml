@@ -1,0 +1,38 @@
+[package]
+name = "v_tileworkizer"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.95"
+description = "A native desktop workspace tiler with a persistent session worker"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/juanchoraf/v_tileworkizer"
+build = "build.rs"
+
+[dependencies]
+anyhow = "1.0.104"
+directories = "6.0.0"
+eframe = { version = "0.36.2", default-features = false, features = ["default_fonts", "glow", "x11", "wayland"] }
+semver = "1.0.28"
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.151"
+sha2 = "0.11.0"
+tempfile = "3.27.0"
+ureq = { version = "3.4.1", features = ["json"] }
+v_concat = "0.1.3"
+
+[target.'cfg(all(unix, not(target_os = "macos")))'.dependencies]
+x11rb = { version = "0.14.0", features = ["randr"] }
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.61.2", features = ["Win32_Foundation", "Win32_UI_WindowsAndMessaging", "Win32_Graphics_Gdi", "Win32_UI_HiDpi", "Win32_System_Console", "Win32_System_Threading", "Win32_Graphics_Dwm"] }
+
+[build-dependencies]
+winresource = "0.1.31"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+strip = true
+
+[lints.rust]
+unsafe_op_in_unsafe_fn = "deny"

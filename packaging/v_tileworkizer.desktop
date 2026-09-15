@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=v_tileworkizer
+Comment=Organize your windows into a tiled workspace
+Exec=v_tileworkizer --gui
+Icon=v_tileworkizer
+Terminal=false
+Categories=Utility;DesktopSettings;
+StartupWMClass=v_tileworkizer
