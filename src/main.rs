@@ -19,6 +19,33 @@ mod workspace;
 use anyhow::{Result, bail};
 use v_concat::{v_concat_eprintln, v_concat_println};
 
+const HELP: &str = r#"v_tileworkizer — native tiling workspace organizer
+
+  v_tileworkizer                 Open the desktop GUI and start the session service
+  v_tileworkizer --gui           Open the desktop GUI explicitly
+  v_tileworkizer --service       Run the background worker in the current session
+  v_tileworkizer --supervise     Restart the worker if it exits unexpectedly
+  v_tileworkizer --stop-service  Stop this session's worker and supervisor
+  v_tileworkizer --tile          Request one arrangement (also works while paused)
+  v_tileworkizer --pause         Stop enforcement and restore all arranged displays
+  v_tileworkizer --resume        Enable automatic arrangement and start the worker
+  v_tileworkizer --inspect       Print a fresh read-only desktop inventory as JSON
+  v_tileworkizer --status        Show worker health and configuration location
+  v_tileworkizer --check-update  Check juanchoraf/v_tileworkizer releases
+  v_tileworkizer --update        Download, verify and open the native installer
+  v_tileworkizer --version       Show the application version
+  v_tileworkizer --help          Show this help
+
+Automatic tiling starts not enforced. Choose a layout and Apply & Enforce in the GUI.
+Not Enforce beside Arrange Once stops and restores only the selected display.
+Preset studio lets you save custom tiles, assign windows and set overlapping layers.
+Assignments track live window IDs and reconnect by application identity after a restart.
+For multiple windows from one app, set a stable title fragment under Reconnect options.
+Ambiguous matches wait for your selection; changing a live window title keeps its tile.
+The background worker continues when the GUI closes. Each user has independent
+configuration. Installer registration starts the service at desktop login.
+"#;
+
 fn main() {
     if let Err(error) = run() {
         v_concat_eprintln!("v_tileworkizer: {error:#}");
@@ -36,7 +63,7 @@ fn run() -> Result<()> {
         bail!("Expected one option; use --help");
     }
     match args.first().map(String::as_str) {
-        Some("--help" | "-h") => v_concat_println!("{}", include_str!("../docs/help.txt")),
+        Some("--help" | "-h") => v_concat_println!("{}", HELP),
         Some("--version" | "-V") => {
             v_concat_println!("v_tileworkizer {}", env!("CARGO_PKG_VERSION"))
         }
