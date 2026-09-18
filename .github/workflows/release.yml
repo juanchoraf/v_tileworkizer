@@ -134,12 +134,7 @@ jobs:
         if: matrix.shell == 'pwsh'
         shell: pwsh
         timeout-minutes: 15
-        env:
-          WIX7_EULA_ACCEPTED: ${{ vars.WIX7_EULA_ACCEPTED }}
         run: |
-          if ($env:WIX7_EULA_ACCEPTED -ne 'true') {
-            throw 'Review the WiX 7 OSMF EULA, then set the repository Actions variable WIX7_EULA_ACCEPTED to true.'
-          }
           dotnet tool install --global wix --version 7.0.0
           if ($LASTEXITCODE -ne 0) { throw 'Failed to install WiX 7.' }
           "$env:USERPROFILE\.dotnet\tools" | Out-File -FilePath $env:GITHUB_PATH -Append -Encoding utf8
